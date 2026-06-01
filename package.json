@@ -1,0 +1,13 @@
+{
+  "name": "witchculttranslation-scraper",
+  "version": "1.0.0",
+  "description": "Scraper for witchculttranslation.com chapters",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^2.7.0"
+  }
+}

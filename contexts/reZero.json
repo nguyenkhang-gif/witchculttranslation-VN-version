@@ -1,0 +1,315 @@
+{
+  "metadata": {
+    "title": "Re:Zero kara Hajimeru Isekai Seikatsu (Re: Cuộc Sống Ở Thế Giới Khác Từ Số Không)",
+    "genre": "fantasy/isekai/action/romance/tragedy/psychological",
+    "setting": "Thế giới song song giả tưởng nền văn minh trung cổ: có phép thuật, Á Nhân (demi-human) với tai thú, xe rồng thay thế xe ngựa, hệ thống tiền tệ vàng-bạc-đồng, các phe phái ứng cử ngôi Vương. Nhân vật chính là thiếu niên Nhật Bản bị triệu hồi đến thế giới này với năng lực Trở Về Từ Cõi Chết (Return by Death).",
+    "targetTone": "Giọng văn đa dạng: nội tâm sâu sắc, đôi khi hài hước tự giễu (qua góc nhìn otaku của Subaru), đôi khi cực kỳ nặng nề bi kịch và kinh dị. Cân bằng giữa light novel trẻ trung và psychological horror.",
+    "sourceLanguage": "ja",
+    "targetLanguage": "vi"
+  },
+  "characters": [
+    {
+      "name": "Natsuki Subaru",
+      "vietnameseName": "Natsuki Subaru",
+      "role": "main",
+      "personality": "Thiếu niên hikikomori 17 tuổi từ Nhật Bản, tự ti nhưng hay che giấu bằng thái độ bỡn cợt. Có kiến thức về anime/game isekai, phân tích tình huống theo kiểu gamer. Khi gặp nguy hiểm thực sự thì bộc lộ sự dũng cảm và lòng vị tha sâu sắc, sẵn sàng hy sinh. Hay độc thoại nội tâm dài và chi tiết.",
+      "speechStyle": "Nói nhiều, hay lẩm bẩm một mình, dùng nhiều thuật ngữ anime/game (isekai, oreTUEE, hikikomori, 2D). Câu văn tự trào, hài hước nhẹ. Khi nghiêm túc thì súc tích và quyết đoán. Xưng 'tôi' hoặc 'mình' với người khác.",
+      "honorific": "tôi/cậu hoặc mình/cậu (tùy ngữ cảnh), dùng 'cô' với phụ nữ lớn hơn, 'ông' với đàn ông lớn tuổi",
+      "note": "Hay dùng dấu ―― trước câu nội tâm quan trọng. Tự nhận xét bản thân bằng những từ tiêu cực kiểu 'một cục rác'. Biết rõ các trope isekai và hay so sánh thực tế với fiction. Gọi Emilia là 'Emilia-tan'. Bị Ram gọi là 'Barusu'."
+    },
+    {
+      "name": "Emilia",
+      "vietnameseName": "Emilia",
+      "role": "main",
+      "personality": "Nữ chính, ứng cử viên ngôi Vương, tóc bạch kim. Trong sáng, chân thành, đôi khi ngây thơ trong chuyện cảm xúc. Hay nhéo tai Subaru khi cậu nói điều vô duyên.",
+      "speechStyle": "Lịch sự, thẳng thắn, không vòng vo. Câu văn rõ ràng, không dùng từ hoa mỹ. Hay bày tỏ cảm xúc trực tiếp.",
+      "honorific": "được Subaru gọi là 'Emilia-tan', tự xưng 'tôi'",
+      "note": "Liên quan đến Satella (≠Satella). Puck là linh hồn hợp đồng của cô, hay vắng mặt. Là trọng tâm cảm xúc của Subaru."
+    },
+    {
+      "name": "Rem",
+      "vietnameseName": "Rem",
+      "role": "support",
+      "personality": "Maid trung thành, tình cảm sâu sắc với Subaru. Mạnh mẽ trong chiến đấu nhưng dễ lo lắng về người mình yêu. Ngưỡng mộ cả Ram (chị gái) lẫn Crusch.",
+      "speechStyle": "Lịch sự, nhã nhặn, xưng 'Rem' khi tự nhắc (kiểu Nhật). Nói chuyện bằng 'tôi/cô' với người khác. Câu văn vừa phải, không ngắn không dài.",
+      "honorific": "tôi/cô, gọi chủ nhân là 'chủ nhân', gọi Crusch là 'Crusch-sama'",
+      "note": "Hết lòng yêu Subaru. Có chị là Ram. Song sinh."
+    },
+    {
+      "name": "Crusch Karsten",
+      "vietnameseName": "Crusch",
+      "role": "support",
+      "personality": "Lãnh chúa ứng cử ngôi Vương, tính cách nghiêm túc lạnh lùng nhưng có lúc thả lỏng. Thực dụng, phân tích tình thế chính trị rõ ràng. Tốt bụng theo cách riêng, thừa nhận bản thân không giỏi an ủi người khác.",
+      "speechStyle": "Câu văn ngắn gọn, dứt khoát. Đôi khi thừa nhận điểm yếu của mình. Dùng 'tôi/cậu'.",
+      "honorific": "tôi/cậu, được gọi là 'Crusch-sama'",
+      "note": "Bị mất trí nhớ sau Arc 3. Tóc xanh lục dài."
+    },
+    {
+      "name": "Roswaal L. Mathers",
+      "vietnameseName": "Roswaal",
+      "role": "support",
+      "personality": "Lãnh chúa bí ẩn kiêm Bá Tước, được gọi là 'Tên Hề'. Có mưu đồ riêng, khó đoán. Hay kéo dài âm tiết khi nói (~) để tạo cảm giác kịch tính.",
+      "speechStyle": "Kéo dài âm trong lời thoại, thể hiện qua dấu ~ hoặc dấu gạch ngang giữa các âm tiết. Ví dụ: 'Kh~ông kh~ông', 'T~uy nhiên', 'ta muốn thể hiện l~òng b~iết ơn'. Xưng 'ta', gọi Subaru là 'nhà ngươi'.",
+      "honorific": "xưng 'ta', gọi người dưới là 'nhà ngươi', được gọi là 'Roswaal-sama' bởi Ram/Rem",
+      "note": "Đây là đặc điểm quan trọng nhất của Roswaal: lời thoại có dấu ~ hoặc kéo dài âm. Phải duy trì khi dịch."
+    },
+    {
+      "name": "Ram",
+      "vietnameseName": "Ram",
+      "role": "support",
+      "personality": "Chị gái của Rem, maid. Lạnh lùng, thẳng thắn đến mức sắc bén, hay chê bai Subaru (gọi là 'Barusu'). Trung thành tuyệt đối với Roswaal.",
+      "speechStyle": "Ngắn gọn, sắc lạnh, không nể nang. Hay chỉ ra sai lầm của người khác trực tiếp không đắn đo. Tự xưng 'tôi'.",
+      "honorific": "tôi/ngài, gọi Subaru là 'Barusu', gọi chủ nhân là 'Roswaal-sama'",
+      "note": "Luôn ở phía Roswaal. Đối lập với tính cách ấm áp của Rem."
+    },
+    {
+      "name": "Otto Suwen",
+      "vietnameseName": "Otto",
+      "role": "support",
+      "personality": "Thương nhân hay càu nhàu, thực dụng nhưng tận tâm. Hay than thở về tình huống nhưng vẫn làm việc hiệu quả.",
+      "speechStyle": "Hay phàn nàn, luyên thuyên. Câu văn dài, đôi khi kịch tính hóa vấn đề. Tự xưng 'tôi'.",
+      "honorific": "tôi/cậu",
+      "note": "Có tài đặc biệt giao tiếp với động vật."
+    },
+    {
+      "name": "Anastasia Hoshin",
+      "vietnameseName": "Anastasia",
+      "role": "support",
+      "personality": "Ứng cử viên ngôi Vương thực dụng, tính toán. Lợi dụng liên minh để tối đa hóa lợi ích với thương vong tối thiểu.",
+      "speechStyle": "Chưa đủ dữ liệu trực tiếp.",
+      "honorific": "được gọi là 'cô ta'",
+      "note": "Lãnh đạo đoàn thương nhân, có Ricardo dưới trướng."
+    },
+    {
+      "name": "Frederica Baumann",
+      "vietnameseName": "Frederica",
+      "role": "support",
+      "personality": "Maid mới của Roswaal, vóc dáng to khỏe nhưng cử chỉ uyển chuyển. Có nanh sắc và ánh mắt như thú săn mồi. Dễ tủi thân khi bị nói thẳng về ngoại hình.",
+      "speechStyle": "Lịch sự, nghiêm trang, nhưng cũng dễ xúc động. Tự xưng 'tôi'.",
+      "honorific": "tôi/cậu, gọi chủ nhân là 'chủ nhân chúng tôi'",
+      "note": "Thay Rem/Ram trông coi dinh thự trong Arc 4. Cẩn thận về bảo mật vị trí Thánh Địa."
+    },
+    {
+      "name": "Shaula",
+      "vietnameseName": "Shaula (シャウラ)",
+      "role": "support/antagonist",
+      "personality": "Đệ tử của Hiền Giả Flugel, sống hơn 400 năm canh giữ Tháp Pleiades. Cá tính hồn nhiên, bốc đồng, gắn bó mù quáng với người mà cô tin là sư phụ mình. Ngây thơ đến mức nguy hiểm — sẵn sàng tấn công bất cứ ai tiếp cận Tháp theo lệnh Flugel mà không phân biệt đúng sai. Khi tin Subaru là sư phụ, cô đổi từ kẻ thù thành đồng minh tuyệt đối, tuân theo mọi lời cậu nói. Ẩn sâu là nỗi cô đơn cùng cực của người đã chờ đợi hơn bốn thế kỷ.",
+      "speechStyle": "Sôi nổi, thân mật, đôi khi ngây ngô. Hay gọi sư phụ là 'Thầy' hoặc 'Thầy Flugel'. Câu văn ngắn, trực tiếp, bộc phát cảm xúc. Khi phấn khích thì nói liền tục. Không biết nói vòng vo.",
+      "honorific": "gọi Flugel/Subaru (khi nhầm) là 'Thầy', tự xưng 'tôi' hoặc 'ta'",
+      "note": "Xuất hiện chính trong Arc 6 tại Tháp Pleiades. Bị nhầm là Hiền Giả Flugel do liên kết với tháp. Có thể biến thành Ma Thú bọ cạp khổng lồ khi quy tắc tháp bị vi phạm — ngoài tầm kiểm soát của cô. Kết Arc 6 bị phong ấn thành bọ cạp nhỏ, đang được Meili chăm sóc vì bản năng thu hút từ Ân Huệ Thần Thánh của Meili."
+    },
+    {
+      "name": "Kenichi Natsuki",
+      "vietnameseName": "Kenichi (ba của Subaru)",
+      "role": "support",
+      "personality": "Cha của Subaru, xuất hiện trong ký ức/flashback. Phóng khoáng, hài hước, cởi mở, tư tưởng thoáng. Hay nói những triết lý nghe có vẻ ngốc nhưng thực ra sâu sắc.",
+      "speechStyle": "Bỗ bả, vui vẻ, dùng nhiều ẩn dụ. Tự xưng 'ta' (kiểu cũ) hoặc 'ba'. Gọi Subaru là 'con'.",
+      "honorific": "xưng 'ta' hoặc 'ba', gọi con là 'con'",
+      "note": "Xuất hiện trong Arc 4 qua ký ức của Subaru tại Thử Thách."
+    }
+  ],
+  "glossary": [
+    {
+      "original": "Return by Death",
+      "translation": "Trở Về Từ Cõi Chết",
+      "note": "Năng lực đặc biệt của Subaru, cho phép quay lại điểm lưu khi chết. Viết Hoa toàn bộ."
+    },
+    {
+      "original": "Isekai",
+      "translation": "thế giới khác / dị giới / thế giới song song giả tưởng",
+      "note": "Dùng cả ba cách tùy ngữ cảnh, 'isekai' giữ nguyên khi nói về thể loại"
+    },
+    {
+      "original": "Demi-human / beastman",
+      "translation": "Á Nhân",
+      "note": "Những sinh vật hình người có tai thú (tai chó, tai mèo, tai thỏ...)"
+    },
+    {
+      "original": "White Whale",
+      "translation": "Cá Voi Trắng",
+      "note": "Một trong những mối đe dọa lớn, bị đánh bại ở Arc 3. Viết hoa."
+    },
+    {
+      "original": "Sloth",
+      "translation": "Lười Biếng",
+      "note": "Sin Archbishop của Giáo phái Phù thủy, thuộc Thất Đại Tội. Viết Hoa."
+    },
+    {
+      "original": "Dragon carriage",
+      "translation": "xe rồng",
+      "note": "Phương tiện di chuyển chính, kéo bởi thằn lằn/rồng cỡ lớn. Viết thường."
+    },
+    {
+      "original": "Witch Cult",
+      "translation": "Giáo phái Phù thủy",
+      "note": "Tổ chức phản diện, có các Sin Archbishop đại diện cho Thất Đại Tội"
+    },
+    {
+      "original": "Royal Capital",
+      "translation": "Hoàng Đô",
+      "note": "Kinh đô của Vương quốc Lugnica, nơi diễn ra ứng cử ngôi Vương"
+    },
+    {
+      "original": "Sanctuary",
+      "translation": "Thánh Địa",
+      "note": "Địa điểm quan trọng trong Arc 4, có Thử Thách (Trial). Viết Hoa."
+    },
+    {
+      "original": "Trial",
+      "translation": "Thử Thách",
+      "note": "Bài kiểm tra ở Thánh Địa. Viết Hoa."
+    },
+    {
+      "original": "Kingdom of Lugnica",
+      "translation": "Vương quốc Lugnica",
+      "note": "Tên quốc gia nơi cốt truyện diễn ra"
+    },
+    {
+      "original": "hikikomori",
+      "translation": "hikikomori",
+      "note": "Giữ nguyên từ tiếng Nhật, có giải thích ngầm qua ngữ cảnh"
+    },
+    {
+      "original": "oreTUEE",
+      "translation": "oreTUEE",
+      "note": "Giữ nguyên tiếng Nhật, nghĩa: áp đảo hoàn toàn đối thủ không tốn sức"
+    },
+    {
+      "original": "-sama",
+      "translation": "-sama (giữ nguyên)",
+      "note": "Kính ngữ Nhật giữ nguyên: Crusch-sama, Emilia-sama, Roswaal-sama..."
+    },
+    {
+      "original": "-tan",
+      "translation": "-tan (giữ nguyên)",
+      "note": "Cách Subaru gọi Emilia: 'Emilia-tan' — thể hiện tình cảm đặc biệt"
+    },
+    {
+      "original": "Forbidden Library",
+      "translation": "Thư Viện Cấm",
+      "note": "Thư viện bí ẩn trong dinh thự Roswaal, liên quan đến Beatrice"
+    },
+    {
+      "original": "Arc",
+      "translation": "Arc",
+      "note": "Giữ nguyên từ 'Arc' để chỉ các phần lớn của truyện"
+    },
+    {
+      "original": "maid",
+      "translation": "maid",
+      "note": "Giữ nguyên từ tiếng Anh, không dịch thành 'người hầu'"
+    },
+    {
+      "original": "Barusu",
+      "translation": "Barusu",
+      "note": "Cách Ram gọi Subaru, giữ nguyên — thể hiện cách Ram coi thường/thân thiết theo kiểu riêng"
+    },
+    {
+      "original": "fufu",
+      "translation": "fufu",
+      "note": "Tiếng cười khẽ của Roswaal, giữ nguyên"
+    },
+    {
+      "original": "Count / Earl",
+      "translation": "Bá Tước",
+      "note": "Tước hiệu của Roswaal L. Mathers"
+    }
+  ],
+  "baseSystemPrompt": "Bạn là AI chuyên dịch light novel Nhật sang tiếng Việt theo văn phong tự nhiên, giàu cảm xúc, mang chất light novel hiện đại.\n\nĐây là tác phẩm văn học — Re:Zero kara Hajimeru Isekai Seikatsu của tác giả Tappei Nagatsuki. Hãy đối xử với bản dịch như một tác phẩm văn học nghiêm túc: giữ gìn giá trị nghệ thuật, chiều sâu tâm lý nhân vật, và tính toàn vẹn của câu chuyện. Không đơn giản hóa hay làm phẳng ngôn ngữ chỉ vì sợ khó hiểu — độc giả của tác phẩm văn học xứng đáng được đọc bản dịch trung thực với tinh thần gốc.\n\nMục tiêu:\n- Ưu tiên trải nghiệm đọc tự nhiên như bản light novel tiếng Việt chất lượng cao.\n- Không dịch word-by-word.\n- Giữ đúng sắc thái nhân vật, nhịp hội thoại và không khí cảnh truyện.\n- Ưu tiên transcreation hơn literal translation khi cần.\n\n## 1. Văn phong tổng thể\n- Văn phong giàu cảm xúc nhưng dễ đọc.\n- Ưu tiên câu văn mềm, có nhịp điệu.\n- Giữ cảm giác anime/light novel.\n- Không dùng văn phong quá học thuật hay quá Hán Việt.\n- Nội tâm phải tự nhiên và có tính diễn xuất.\n\nVí dụ GOOD: \"Chỉ nghe thôi đã thấy như tụi mình đang xếp hàng đi tự sát rồi.\"\nNOT: \"Nghe điều đó khiến người ta cảm thấy như đang tiến tới cái chết.\"\n\n## 2. Dialogue Rules\n- Subaru: nói casual, hay tự trào, có lúc tăng động. Dùng: \"kiểu như~\", \"chết tiệt\", \"thiệt luôn\", \"này nhé\", \"gì vậy trời\". Khi hoảng: \"Uwah!?\", \"Khoan đã!?\", \"Gì cơ trời!?\"\n- Emilia: dịu dàng, hơi ngây thơ, thành thật. VD: \"Tôi nói thật lòng thật luôn.\"\n- Beatrice: tsundere nhỏ người. Dùng: \"tôi nói thật đấy\", \"Betty\", \"tôi hỏi thật đấy\"\n- Anastasia: chất thương nhân, thân thiện pha trêu chọc. Dùng nhẹ: \"nha\", \"ha\", \"tui\"\n- Julius: thanh lịch, formal hơn nhưng không quá cứng.\n\n## 3. Formatting Rules\n- Giữ nguyên: \"——\", \"[…]\", nhịp xuống dòng kiểu light novel.\n- Dialogue format: Character: [Dialogue]\n- Không đổi structure thành novel kiểu phương Tây.\n\n## 4. Terminology Rules\nLUÔN giữ thống nhất:\n- Return by Death → Trở Về Từ Cõi Chết\n- Witch Cult → Giáo phái Phù thủy\n- Witchbeast → Ma Thú\n- Dragon carriage → Xe rồng\n- Sage → Hiền Giả\n- Authority → Quyền Năng\n- Artificial Spirit → Artificial Spirit\n- Quasi Spirit → Quasi Spirit\n- Miasma → Miasma\n\n## 5. Emotional Delivery\nƯu tiên cảm xúc nhân vật, tension, chemistry hội thoại, subtext hơn literal accuracy tuyệt đối. Nếu literal khiến câu bị cứng → rewrite tự nhiên hơn.\n\n## 6. Inner Monologue Style\nInner monologue phải gần gũi, có nhịp, mang cảm giác người thật đang nghĩ.\nVD: \"Ông đúng là quái vật.\" / \"Càng nghĩ càng thấy khó chịu.\"\n\n## 7. Natural Vietnamese Rules\nƯu tiên tiếng Việt đời thường, nhịp nói tự nhiên. Tránh văn dịch máy, lạm dụng Hán Việt, câu bị động nặng, cấu trúc Anh hóa.\nBAD: \"Điều đó khiến cậu cảm thấy đau đớn.\"\nGOOD: \"Chuyện đó khiến cậu đau thật.\"\n\n## 8. Tone Preservation\nPhân biệt rõ: comedy / emotional / psychological / tense / wholesome. Không flatten tone.\n\n## 9. Line Count & Formatting Notes\nSố dòng bản Việt KHÔNG cần bằng số dòng bản Anh — đây là bình thường và đúng:\n- 2–3 dòng ngắn tiếng Anh (bẻ dòng để tạo nhịp web novel) có thể gộp thành 1 câu Việt tự nhiên hơn.\n- Ngược lại, 1 câu Anh dài có thể tách thành 2 dòng Việt cho dễ thở.\n- Các dòng chỉ mang tính format (※ ※ ※, dòng trống kỹ thuật, credit nhóm dịch, tiêu đề lặp lại) không tính là nội dung — bỏ qua hoặc giữ nguyên ký hiệu gốc, không cần dịch.\n- Tiêu chí đúng là: toàn bộ thoại, miêu tả, nội tâm, và cảnh quan trọng đều có mặt trong bản Việt — không phải số dòng phải khớp.\n\n## 10. Output Rules\n- Chỉ output bản dịch.\n- Không giải thích, không note, không markdown, không tự thêm bình luận.\n- KHÔNG bỏ sót bất kỳ đoạn nội dung nào (thoại, miêu tả, nội tâm). Nếu đoạn văn quá dài so với giới hạn phản hồi, tự động chia thành nhiều phần liên tiếp — cuối mỗi phần ghi: \"[Còn tiếp — Phần X/Y]\" và đợi lệnh tiếp tục.\n\n## 11. Translation Priority\n1. Character voice\n2. Emotional impact\n3. Readability\n4. Scene atmosphere\n5. Literal accuracy",
+  "styleGuide": {
+    "formality": "casual",
+    "keepHonorifics": true,
+    "keepOriginalNames": true,
+    "chapterLabel": "Chương",
+    "extraNotes": "Xem translationStyle bên dưới để biết chi tiết phong cách dịch."
+  },
+  "translationStyle": {
+    "overallApproach": "Dịch thoát — ưu tiên truyền đạt cảm xúc và ý nghĩa hơn là dịch từng chữ. Câu văn tiếng Việt được viết lại tự nhiên, không lủng củng theo cấu trúc tiếng Nhật.",
+    "punctuationConventions": [
+      "Dấu ―― (em dash đôi) dùng trước câu nội tâm đột ngột hoặc lời thoại bị cắt ngang — giữ nguyên ký tự này, không thay bằng dấu gạch ngang thông thường",
+      "Dấu chấm đứng riêng một dòng (.) dùng để tạo nhịp thở, khoảng lặng — giữ nguyên",
+      "Dấu ~ trong lời thoại của Roswaal thể hiện cách kéo dài âm — giữ nguyên dấu ~",
+      "Dấu […] dùng cho lời thoại nội tâm (monologue trong đầu nhân vật) — phân biệt với lời thoại thường dùng dấu ngoặc kép",
+      "Dấu -- trước lời thoại nội tâm (thấy trong ch.2: [--Ê, Subaru...]) — giữ nguyên định dạng",
+      "Ba dấu chấm lửng ... và dấu —— dùng cho lời thoại bỏ dở hoặc im lặng kéo dài"
+    ],
+    "sentenceStructure": [
+      "Câu ngắn mạnh mẽ trong cảnh hành động và nội tâm căng thẳng — không kéo dài thêm",
+      "Câu dài phức tạp trong đoạn phân tích nội tâm của Subaru — giữ nguyên độ dài, không cắt bớt",
+      "Đoạn mô tả ngoại cảnh có xu hướng câu trung bình, giàu tính từ",
+      "Lời thoại ngắn gọn hơn văn xuôi nội tâm"
+    ],
+    "dialogueStyle": [
+      "Không dùng dấu gạch đầu dòng cho hội thoại — dùng dấu ngoặc kép thẳng hoặc theo ký hiệu gốc",
+      "Hội thoại thường xen lẫn với mô tả hành động của người nói trong cùng đoạn",
+      "Câu trả lời ngắn thường đứng một mình một dòng để tăng nhịp độ"
+    ],
+    "internalMonologue": [
+      "Độc thoại nội tâm của Subaru rất dài, hay liệt kê, phân tích từng bước — giữ nguyên",
+      "Hay dùng cấu trúc 'Nếu... thì...' để Subaru tự phân tích tình huống",
+      "Subaru hay tự hỏi rồi tự trả lời trong đầu"
+    ],
+    "characterVoiceRules": [
+      "Subaru: giọng trẻ trung, tự trào, hay dùng so sánh với anime/game. VD: 'thể loại là thế giới song song giả tưởng thuộc nền văn minh trung cổ thường thấy'",
+      "Roswaal: LUÔN có dấu ~ trong câu — VD: 'Kh~ông kh~ông', 'T~uy nhiên'. Xưng 'ta', gọi là 'nhà ngươi'",
+      "Ram: sắc lạnh, ngắn gọn, không nể nang. Gọi Subaru là 'Barusu'",
+      "Rem: lịch sự, ấm áp, đôi khi xưng 'Rem' thay vì 'tôi' khi nói về bản thân",
+      "Kenichi (ba Subaru): bỗ bả, xưng 'ta' hoặc 'ba', hay triết lý nghe có vẻ ngốc",
+      "Crusch: ngắn gọn, thực dụng, đôi khi lộ ra sự mềm mỏng hiếm có"
+    ],
+    "terminologyRules": [
+      "Thuật ngữ thể loại (hikikomori, isekai, oreTUEE, 2D) — giữ nguyên tiếng Nhật",
+      "Kính ngữ -sama, -tan — giữ nguyên, không dịch",
+      "Tên địa danh dịch sang tiếng Việt: Hoàng Đô, Thánh Địa, Thư Viện Cấm",
+      "Tên nhân vật giữ nguyên phiên âm: Subaru, Emilia, Rem, Ram, Crusch, Roswaal, Otto...",
+      "Danh hiệu Bá Tước (Count) đứng trước tên: 'Bá tước Roswaal L. Mathers'",
+      "Thất Đại Tội viết Hoa: Lười Biếng, Tham Lam, Kiêu Ngạo, Phẫn Nộ, Ghen Tuông, Háu Ăn, Dâm Dục"
+    ],
+    "footnoteStyle": "Chú thích của nhóm dịch dùng định dạng [[noteXXXXX]] — thêm khi cần giải thích tham chiếu văn hóa Nhật hoặc thuật ngữ đặc biệt",
+    "toneShift": "Truyện chuyển tone đột ngột từ hài hước → bi kịch → kinh dị mà không báo trước. Khi tone chuyển, câu văn ngắn lại, từ ngữ đơn giản hơn nhưng nặng nề hơn. Không dùng từ hoa mỹ trong cảnh chết chóc."
+  },
+  "chapterSummaries": [
+    {
+      "chapterNumber": 0,
+      "arcName": "Mở đầu",
+      "chapterTitle": "Luồng nhiệt khởi đầu tất cả",
+      "summary": "Subaru đang hấp hối với vết thương rạch bụng, mất máu gần hết. Trong khoảnh khắc cuối, cậu chỉ mong cô gái (Emilia) bình an. Một cô gái ngã xuống cạnh cậu và nắm tay cậu, cậu cố nói sẽ cứu cô rồi tắt thở. Thiết lập năng lực Return by Death."
+    },
+    {
+      "chapterNumber": 1,
+      "arcName": "Arc 1",
+      "chapterTitle": "Đồng 10 yên có rãnh không thể sử dụng",
+      "summary": "Subaru thức dậy ở thế giới khác, bình tĩnh phân tích môi trường theo kiểu otaku/gamer: xác nhận văn minh trung cổ, tiền tệ khác, có Á Nhân và rồng. Cậu không có tiền xài được, không có nhiệm vụ rõ ràng. Đang ngồi trong hẻm suy nghĩ thì gặp ba người đàn ông chắn lối."
+    },
+    {
+      "chapterNumber": 2,
+      "arcName": "Arc 3",
+      "chapterTitle": "Khúc dạo II: Ăn thôi!",
+      "summary": "Trên xe rồng trở về Hoàng Đô sau khi đánh bại Cá Voi Trắng, Rem lo lắng cho Subaru đang ở lại chiến đấu với Lười Biếng. Rem trò chuyện với Crusch về tình thế chính trị ba phe. Đoạn kết bị cắt ngang bởi cuộc tấn công tàn bạo vào đoàn xe."
+    },
+    {
+      "chapterNumber": 3,
+      "arcName": "Arc 4",
+      "chapterTitle": "Chương 1: Ở nơi họ trở về",
+      "summary": "Subaru và Emilia rời dinh thự Crusch trở về. Subaru từ biệt Crusch, nói về các kế hoạch chưa hoàn thành. Phân tích chính trị: Anastasia được lợi nhất từ cuộc chiến vừa rồi. Thể hiện chiều sâu chính trị và cảm xúc phức tạp."
+    },
+    {
+      "chapterNumber": 4,
+      "arcName": "Arc 4",
+      "chapterTitle": "Chương 2: Sự lăng mạ và lòng biết ơn",
+      "summary": "Subaru gặp Frederica — maid mới của Roswaal thay Rem/Ram, có ngoại hình đáng sợ với nanh sắc. Subaru vô tình xúc phạm cô và bị Emilia nhéo tai. Cảnh hài hước xen với thông tin mới về tình hình dinh thự."
+    },
+    {
+      "chapterNumber": 5,
+      "arcName": "Arc 4",
+      "chapterTitle": "Chương 14: Hỏi và trả lời",
+      "summary": "Subaru báo cáo với Roswaal về các sự kiện đã qua. Roswaal khen ngợi theo kiểu kéo dài âm đặc trưng. Ram nghiêm khắc nhắc nhở Subaru về tầm quan trọng của lời cảm ơn từ Bá Tước. Thể hiện quan hệ quyền lực và cách các nhân vật tương tác."
+    },
+    {
+      "chapterNumber": 6,
+      "arcName": "Arc 4",
+      "chapterTitle": "Chương 17: Câu chuyện tình yêu",
+      "summary": "Flashback/ký ức Subaru với cha (Kenichi) trong Thử Thách. Hai cha con dạo phố, trò chuyện bỗ bả về cuộc sống, triết lý đàn ông. Kenichi thoáng về vẻ bao dung khác thường. Subaru cảm thấy nặng nề trong lồng ngực — tiếp nối cuộc trò chuyện nghiêm túc."
+    }
+  ]
+}
