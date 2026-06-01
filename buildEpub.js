@@ -9,8 +9,9 @@ const SOURCES = {
   gptres: { dir: "gptres", label: "Bản dịch GPT/Gemini (gptres/)",   lang: "vi" },
 };
 
-const BUILD_DIR = path.join(__dirname, "_epub_build");
-const OUT_DIR   = path.join(__dirname, "epubs");
+const BUILD_DIR    = path.join(__dirname, "_epub_build");
+const OUT_DIR      = path.join(__dirname, "epubs");
+const COVER_IMAGE  = path.join(__dirname, "thumbnails", "index.jpg");
 
 function ask(q) {
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -126,6 +127,25 @@ async function main() {
   // style.css
   fs.writeFileSync(path.join(BUILD_DIR, "OEBPS", "style.css"), CSS);
 
+  // cover image
+  const hasCover = fs.existsSync(COVER_IMAGE);
+  if (hasCover) {
+    fs.mkdirSync(path.join(BUILD_DIR, "OEBPS", "images"), { recursive: true });
+    fs.copyFileSync(COVER_IMAGE, path.join(BUILD_DIR, "OEBPS", "images", "cover.jpg"));
+    fs.writeFileSync(path.join(BUILD_DIR, "OEBPS", "chapters", "cover.xhtml"),
+`<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Cover</title>
+  <style>body{margin:0;padding:0;text-align:center}img{max-width:100%;height:auto}</style>
+</head>
+<body><img src="../images/cover.jpg" alt="Cover"/></body>
+</html>`);
+    console.log("  ✓ cover.jpg");
+  }
+
   // chapters
   const manifest = [];
   const spine    = [];
@@ -148,11 +168,16 @@ async function main() {
 
   const uid = `urn:uuid:rezero-${Date.now()}`;
 
+  const coverMeta    = hasCover ? `\n    <meta name="cover" content="cover-image"/>` : "";
+  const coverManifest = hasCover ? `    <item id="cover-image" href="images/cover.jpg" media-type="image/jpeg"/>
+    <item id="cover-page" href="chapters/cover.xhtml" media-type="application/xhtml+xml"/>` : "";
+  const coverSpine   = hasCover ? `    <itemref idref="cover-page"/>` : "";
+
   // content.opf
   fs.writeFileSync(path.join(BUILD_DIR, "OEBPS", "content.opf"),
 `<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" unique-identifier="bookId" version="2.0">
-  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">${coverMeta}
     <dc:title>Re:Zero – Arc 6</dc:title>
     <dc:creator>Tappei Nagatsuki</dc:creator>
     <dc:language>${lang}</dc:language>
@@ -161,9 +186,11 @@ async function main() {
   <manifest>
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
     <item id="css" href="style.css" media-type="text/css"/>
+${coverManifest}
 ${manifest.join("\n")}
   </manifest>
   <spine toc="ncx">
+${coverSpine}
 ${spine.join("\n")}
   </spine>
 </package>`);
