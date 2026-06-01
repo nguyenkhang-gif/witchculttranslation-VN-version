@@ -6,7 +6,7 @@ const readline = require("readline");
 require("dotenv").config();
 const API_KEY = process.env.GEMINI_API_KEY;
 const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models";
-const MODEL = "gemma-4-31b-it";
+const MODEL = "gemma-4-26b-a4b-it";
 
 const PROMPTS_DIR = path.join(__dirname, "prompts");
 const GPTRES_DIR = path.join(__dirname, "gptres");
@@ -55,6 +55,7 @@ async function streamToFile(rawPrompt, outPath) {
 
   if (!res.ok) {
     const data = await res.json();
+    console.error("API Error:", JSON.stringify(data, null, 2));
     throw new Error(data.error?.message || `HTTP ${res.status}`);
   }
 
@@ -124,7 +125,7 @@ async function main() {
   pending.forEach((f, i) => console.log(`  ${i + 1}. ${f}`));
 
   // Mảng index muốn ưu tiên — sửa tại đây, để [] để dùng input
-  const PRESET = [10,11,12,13,14,15,16,17,18]; 
+  const PRESET = [13]; 
 
   let toProcess = [];
   // Tìm file theo chapter number (vd: 24 → chapter_024.txt)

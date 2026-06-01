@@ -1,292 +1,194 @@
 const fs = require("fs");
 const path = require("path");
-const os = require("os");
 const { execSync } = require("child_process");
 const readline = require("readline");
 
 const SOURCES = {
-  txt: { dir: "txt", label: "Bản gốc tiếng Anh (txt/)" },
-  txtVN: { dir: "txtVN", label: "Bản dịch thủ công (txtVN/)" },
-  gptres: { dir: "gptres", label: "Bản dịch GPT (gptres/)" },
+  txt:    { dir: "txt",    label: "Bản gốc tiếng Anh (txt/)",        lang: "en" },
+  txtVN:  { dir: "txtVN",  label: "Bản dịch thủ công (txtVN/)",      lang: "vi" },
+  gptres: { dir: "gptres", label: "Bản dịch GPT/Gemini (gptres/)",   lang: "vi" },
 };
 
-const BOOK_TITLE = "Re:Zero – Arc 6";
-const BOOK_AUTHOR = "Tappei Nagatsuki";
-const BOOK_LANG_MAP = { txt: "en", txtVN: "vi", gptres: "vi" };
+const BUILD_DIR = path.join(__dirname, "_epub_build");
+const OUT_DIR   = path.join(__dirname, "epubs");
 
-// ── helpers ──────────────────────────────────────────────────────────────────
-
-function ask(question) {
+function ask(q) {
   const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-  return new Promise((resolve) =>
-    rl.question(question, (ans) => { rl.close(); resolve(ans.trim()); })
-  );
+  return new Promise((r) => rl.question(q, (a) => { rl.close(); r(a.trim()); }));
 }
 
-function escapeXml(str) {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
+function escapeXml(s) {
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
-// ── text → XHTML ─────────────────────────────────────────────────────────────
+function txtToXhtml(raw, title) {
+  const lines = raw.replace(/\r\n/g, "\n").split("\n").slice(1); // skip title line
+  const paras = [];
+  let buf = [];
 
-function txtToXhtml(rawText, chapterId) {
-  const lines = rawText.replace(/\r\n/g, "\n").split("\n");
-
-  // Line 1 is always the title
-  const title = lines[0].trim();
-  const bodyLines = lines.slice(1);
-
-  const paragraphs = [];
-  let currentPara = [];
-
-  for (const line of bodyLines) {
-    const trimmed = line.trim();
-
-    if (trimmed === "") {
-      if (currentPara.length > 0) {
-        paragraphs.push({ type: "p", text: currentPara.join(" ") });
-        currentPara = [];
-      }
+  for (const line of lines) {
+    const t = line.trim();
+    if (!t) {
+      if (buf.length) { paras.push(buf.join(" ")); buf = []; }
       continue;
     }
-
-    // Section divider ※
-    if (/^[※＊\*\s]+$/.test(trimmed) || trimmed === "※") {
-      if (currentPara.length > 0) {
-        paragraphs.push({ type: "p", text: currentPara.join(" ") });
-        currentPara = [];
-      }
-      paragraphs.push({ type: "divider" });
+    if (/^[※＊\s*]+$/.test(t)) {
+      if (buf.length) { paras.push(buf.join(" ")); buf = []; }
+      paras.push("※");
       continue;
     }
-
-    currentPara.push(trimmed);
+    buf.push(t);
   }
-  if (currentPara.length > 0) {
-    paragraphs.push({ type: "p", text: currentPara.join(" ") });
-  }
+  if (buf.length) paras.push(buf.join(" "));
 
-  const bodyHtml = paragraphs
-    .map((p) => {
-      if (p.type === "divider") return `<p class="divider">※　※　※</p>`;
-      const text = escapeXml(p.text);
-      // Dialogue lines starting with —— or character name
-      if (p.text.startsWith("——") || /^[A-Za-zÀ-ỹ\s]+:\s*\[/.test(p.text)) {
-        return `<p class="dialogue">${text}</p>`;
-      }
-      return `<p>${text}</p>`;
-    })
-    .join("\n    ");
+  const body = paras.map((p) => {
+    if (p === "※") return `<p class="div">※　※　※</p>`;
+    const txt = escapeXml(p);
+    if (p.startsWith("——") || /^[\w\s]+:\s*\[/.test(p))
+      return `<p class="dlg">${txt}</p>`;
+    return `<p>${txt}</p>`;
+  }).join("\n    ");
 
   return `<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="vi">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>${escapeXml(title)}</title>
   <link rel="stylesheet" type="text/css" href="../style.css"/>
 </head>
 <body>
-  <h2 class="chapter-title">${escapeXml(title)}</h2>
-  ${bodyHtml}
+  <h2>${escapeXml(title)}</h2>
+  ${body}
 </body>
 </html>`;
 }
 
-// ── CSS ──────────────────────────────────────────────────────────────────────
+const CSS = `body{font-family:Georgia,serif;font-size:1em;line-height:1.8;margin:1em 1.5em;color:#1a1a1a}
+h2{font-size:1.15em;text-align:center;border-bottom:1px solid #ccc;padding-bottom:.5em;margin:1.5em 0 1em}
+p{margin:.4em 0;text-indent:1em}
+p.dlg{text-indent:0;margin:.5em 0}
+p.div{text-align:center;text-indent:0;color:#999;margin:1.2em 0;letter-spacing:.4em}`;
 
-const STYLE_CSS = `
-body {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1em;
-  line-height: 1.8;
-  margin: 1em 1.5em;
-  color: #1a1a1a;
-}
-h2.chapter-title {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin: 1.5em 0 1em;
-  text-align: center;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 0.5em;
-}
-p {
-  margin: 0.4em 0;
-  text-indent: 1em;
-}
-p.dialogue {
-  text-indent: 0;
-  margin: 0.5em 0;
-}
-p.divider {
-  text-align: center;
-  text-indent: 0;
-  color: #888;
-  margin: 1.2em 0;
-  letter-spacing: 0.4em;
-}
-`.trim();
+async function main() {
+  // CLI args: node buildEpub.js [txt|txtVN|gptres] [filename.epub]
+  const argSrc = process.argv[2];
+  const argOut = process.argv[3];
 
-// ── OPF ──────────────────────────────────────────────────────────────────────
+  let srcKey;
+  if (argSrc && SOURCES[argSrc]) {
+    srcKey = argSrc;
+  } else {
+    console.log("\nChọn nguồn:");
+    Object.entries(SOURCES).forEach(([k, v], i) => console.log(`  ${i+1}. [${k}]  ${v.label}`));
+    const srcAns = await ask("Nhập số (1/2/3): ");
+    srcKey = Object.keys(SOURCES)[parseInt(srcAns) - 1];
+    if (!srcKey) { console.log("Không hợp lệ."); process.exit(1); }
+  }
 
-function buildOpf(chapterFiles, lang, title, author) {
-  const manifestItems = chapterFiles
-    .map(
-      (f) =>
-        `    <item id="${f.id}" href="chapters/${f.id}.xhtml" media-type="application/xhtml+xml"/>`
-    )
-    .join("\n");
+  const { dir, lang } = SOURCES[srcKey];
+  const srcDir = path.join(__dirname, dir);
+  if (!fs.existsSync(srcDir)) { console.log(`Folder ${dir}/ không tồn tại.`); process.exit(1); }
 
-  const spineItems = chapterFiles
-    .map((f) => `    <itemref idref="${f.id}"/>`)
-    .join("\n");
+  const files = fs.readdirSync(srcDir).filter(f => f.endsWith(".txt")).sort();
+  if (!files.length) { console.log("Không có file .txt nào."); process.exit(1); }
 
-  const uid = `urn:uuid:rezero-arc6-${Date.now()}`;
+  const defaultOut = `rezero-arc6-${srcKey}.epub`;
+  const outFile = path.resolve(OUT_DIR, argOut || defaultOut);
 
-  return `<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookId" version="2.0">
-  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
-    <dc:title>${escapeXml(title)}</dc:title>
-    <dc:creator>${escapeXml(author)}</dc:creator>
+  // Build
+  console.log(`\nĐọc ${files.length} chapters...`);
+  const chapters = files.map((f) => {
+    const raw   = fs.readFileSync(path.join(srcDir, f), "utf-8");
+    const title = raw.split("\n")[0].trim() || f.replace(".txt","");
+    const id    = f.replace(".txt","");
+    return { id, title, raw };
+  });
+
+  // Clean build dir
+  if (fs.existsSync(BUILD_DIR)) fs.rmSync(BUILD_DIR, { recursive: true });
+  fs.mkdirSync(path.join(BUILD_DIR, "META-INF"), { recursive: true });
+  fs.mkdirSync(path.join(BUILD_DIR, "OEBPS", "chapters"), { recursive: true });
+  fs.mkdirSync(OUT_DIR, { recursive: true });
+
+  // mimetype
+  fs.writeFileSync(path.join(BUILD_DIR, "mimetype"), "application/epub+zip");
+
+  // container.xml
+  fs.writeFileSync(path.join(BUILD_DIR, "META-INF", "container.xml"),
+`<?xml version="1.0"?>
+<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <rootfiles>
+    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
+  </rootfiles>
+</container>`);
+
+  // style.css
+  fs.writeFileSync(path.join(BUILD_DIR, "OEBPS", "style.css"), CSS);
+
+  // chapters
+  const manifest = [];
+  const spine    = [];
+  const nav      = [];
+
+  for (const [i, ch] of chapters.entries()) {
+    fs.writeFileSync(
+      path.join(BUILD_DIR, "OEBPS", "chapters", `${ch.id}.xhtml`),
+      txtToXhtml(ch.raw, ch.title)
+    );
+    manifest.push(`    <item id="${ch.id}" href="chapters/${ch.id}.xhtml" media-type="application/xhtml+xml"/>`);
+    spine.push(`    <itemref idref="${ch.id}"/>`);
+    nav.push(`    <navPoint id="nav${i+1}" playOrder="${i+1}">
+      <navLabel><text>${escapeXml(ch.title)}</text></navLabel>
+      <content src="chapters/${ch.id}.xhtml"/>
+    </navPoint>`);
+    process.stdout.write(`  ✓ ${ch.id}\r`);
+  }
+  console.log(`\n  ${chapters.length} chapters OK`);
+
+  const uid = `urn:uuid:rezero-${Date.now()}`;
+
+  // content.opf
+  fs.writeFileSync(path.join(BUILD_DIR, "OEBPS", "content.opf"),
+`<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="bookId" version="2.0">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:title>Re:Zero – Arc 6</dc:title>
+    <dc:creator>Tappei Nagatsuki</dc:creator>
     <dc:language>${lang}</dc:language>
-    <dc:identifier id="BookId">${uid}</dc:identifier>
+    <dc:identifier id="bookId">${uid}</dc:identifier>
   </metadata>
   <manifest>
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
     <item id="css" href="style.css" media-type="text/css"/>
-${manifestItems}
+${manifest.join("\n")}
   </manifest>
   <spine toc="ncx">
-${spineItems}
+${spine.join("\n")}
   </spine>
-</package>`;
-}
+</package>`);
 
-// ── NCX ──────────────────────────────────────────────────────────────────────
-
-function buildNcx(chapterFiles, title) {
-  const navPoints = chapterFiles
-    .map(
-      (f, i) => `  <navPoint id="nav${i + 1}" playOrder="${i + 1}">
-    <navLabel><text>${escapeXml(f.title)}</text></navLabel>
-    <content src="chapters/${f.id}.xhtml"/>
-  </navPoint>`
-    )
-    .join("\n");
-
-  return `<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN"
-  "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+  // toc.ncx
+  fs.writeFileSync(path.join(BUILD_DIR, "OEBPS", "toc.ncx"),
+`<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
 <ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
-  <head>
-    <meta name="dtb:uid" content="rezero-arc6"/>
-    <meta name="dtb:depth" content="1"/>
-    <meta name="dtb:totalPageCount" content="0"/>
-    <meta name="dtb:maxPageNumber" content="0"/>
-  </head>
-  <docTitle><text>${escapeXml(title)}</text></docTitle>
+  <head><meta name="dtb:uid" content="${uid}"/></head>
+  <docTitle><text>Re:Zero – Arc 6</text></docTitle>
   <navMap>
-${navPoints}
+${nav.join("\n")}
   </navMap>
-</ncx>`;
-}
+</ncx>`);
 
-// ── main ─────────────────────────────────────────────────────────────────────
-
-async function main() {
-  // Pick source
-  console.log("\nChọn nguồn văn bản:");
-  Object.entries(SOURCES).forEach(([key, { label }], i) =>
-    console.log(`  ${i + 1}. [${key}]  ${label}`)
-  );
-  const srcAns = await ask("Nhập số (1/2/3): ");
-  const srcKey = Object.keys(SOURCES)[parseInt(srcAns) - 1];
-  if (!srcKey) { console.log("Lựa chọn không hợp lệ."); process.exit(1); }
-
-  const srcDir = path.join(__dirname, SOURCES[srcKey].dir);
-  if (!fs.existsSync(srcDir)) {
-    console.log(`Folder ${SOURCES[srcKey].dir}/ không tồn tại.`); process.exit(1);
-  }
-
-  const files = fs.readdirSync(srcDir).filter((f) => f.endsWith(".txt")).sort();
-  if (files.length === 0) {
-    console.log("Không có file .txt nào trong folder này."); process.exit(1);
-  }
-
-  // Output filename
-  const defaultOut = `rezero-arc6-${srcKey}.epub`;
-  const outAns = await ask(`\nTên file output (Enter = ${defaultOut}): `);
-  const outFile = path.join(__dirname, outAns || defaultOut);
-
-  const lang = BOOK_LANG_MAP[srcKey];
-
-  // Build chapter data
-  console.log(`\nĐọc ${files.length} chapters từ ${SOURCES[srcKey].dir}/...`);
-  const chapterFiles = files.map((f, i) => {
-    const raw = fs.readFileSync(path.join(srcDir, f), "utf-8");
-    const title = raw.split("\n")[0].trim() || `Chapter ${i + 1}`;
-    const id = f.replace(".txt", "");
-    return { id, title, raw };
-  });
-
-  // Temp dir
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "epub-"));
-  const oebps = path.join(tmpDir, "OEBPS");
-  const chaptersDir = path.join(oebps, "chapters");
-  const metaDir = path.join(tmpDir, "META-INF");
-
-  fs.mkdirSync(oebps); fs.mkdirSync(chaptersDir); fs.mkdirSync(metaDir);
-
-  // mimetype (no compression — written separately)
-  fs.writeFileSync(path.join(tmpDir, "mimetype"), "application/epub+zip", "ascii");
-
-  // container.xml
-  fs.writeFileSync(
-    path.join(metaDir, "container.xml"),
-    `<?xml version="1.0" encoding="UTF-8"?>
-<container version="1.0" xmlns="urn:oasis:schemas:container">
-  <rootfiles>
-    <rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/>
-  </rootfiles>
-</container>`
-  );
-
-  // style.css
-  fs.writeFileSync(path.join(oebps, "style.css"), STYLE_CSS);
-
-  // chapters
-  for (const ch of chapterFiles) {
-    const xhtml = txtToXhtml(ch.raw, ch.id);
-    fs.writeFileSync(path.join(chaptersDir, `${ch.id}.xhtml`), xhtml);
-    process.stdout.write(`  ✓ ${ch.id}\r`);
-  }
-  console.log(`\n  ${chapterFiles.length} chapters generated.`);
-
-  // OPF + NCX
-  fs.writeFileSync(
-    path.join(oebps, "content.opf"),
-    buildOpf(chapterFiles, lang, BOOK_TITLE, BOOK_AUTHOR)
-  );
-  fs.writeFileSync(path.join(oebps, "toc.ncx"), buildNcx(chapterFiles, BOOK_TITLE));
-
-  // Pack EPUB: mimetype first (uncompressed), then everything else
+  // Pack
   if (fs.existsSync(outFile)) fs.unlinkSync(outFile);
+  console.log("📦 Packing EPUB...");
+  execSync(`cd "${BUILD_DIR}" && zip -0 -X "${outFile}" mimetype`);
+  execSync(`cd "${BUILD_DIR}" && zip -r "${outFile}" META-INF OEBPS`);
+  fs.rmSync(BUILD_DIR, { recursive: true });
 
-  execSync(`cd "${tmpDir}" && zip -X0 "${outFile}" mimetype`);
-  execSync(`cd "${tmpDir}" && zip -rg "${outFile}" META-INF OEBPS`);
-
-  // Cleanup
-  fs.rmSync(tmpDir, { recursive: true, force: true });
-
-  const size = (fs.statSync(outFile).size / 1024).toFixed(1);
-  console.log(`\n✅ Done → ${path.basename(outFile)}  (${size} KB)`);
+  const kb = (fs.statSync(outFile).size / 1024).toFixed(1);
+  console.log(`✅ Done → epubs/${path.basename(outFile)}  (${kb} KB)`);
 }
 
-main().catch((err) => { console.error(err.message); process.exit(1); });
+main().catch((e) => { console.error(e.message); process.exit(1); });
