@@ -168,20 +168,26 @@ async function main() {
 
   const uid = `urn:uuid:rezero-${Date.now()}`;
 
-  const coverMeta    = hasCover ? `\n    <meta name="cover" content="cover-image"/>` : "";
-  const coverManifest = hasCover ? `    <item id="cover-image" href="images/cover.jpg" media-type="image/jpeg"/>
-    <item id="cover-page" href="chapters/cover.xhtml" media-type="application/xhtml+xml"/>` : "";
-  const coverSpine   = hasCover ? `    <itemref idref="cover-page"/>` : "";
+  const coverManifest = hasCover
+    ? `    <item id="cover-image" href="images/cover.jpg" media-type="image/jpeg"/>
+    <item id="cover-page" href="chapters/cover.xhtml" media-type="application/xhtml+xml"/>`
+    : "";
+  const coverSpine  = hasCover ? `    <itemref idref="cover-page" linear="no"/>` : "";
+  const coverMeta   = hasCover ? `    <meta name="cover" content="cover-image"/>` : "";
+  const coverGuide  = hasCover
+    ? `  <guide>\n    <reference type="cover" title="Cover" href="chapters/cover.xhtml"/>\n  </guide>`
+    : "";
 
   // content.opf
   fs.writeFileSync(path.join(BUILD_DIR, "OEBPS", "content.opf"),
 `<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://www.idpf.org/2007/opf" unique-identifier="bookId" version="2.0">
-  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">${coverMeta}
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
     <dc:title>Re:Zero – Arc 6</dc:title>
     <dc:creator>Tappei Nagatsuki</dc:creator>
     <dc:language>${lang}</dc:language>
     <dc:identifier id="bookId">${uid}</dc:identifier>
+${coverMeta}
   </metadata>
   <manifest>
     <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
@@ -193,6 +199,7 @@ ${manifest.join("\n")}
 ${coverSpine}
 ${spine.join("\n")}
   </spine>
+${coverGuide}
 </package>`);
 
   // toc.ncx
