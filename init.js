@@ -1,5 +1,32 @@
 const fs = require("fs");
 const path = require("path");
+const { execSync } = require("child_process");
+
+const packageJson = {
+  name: "witchculttranslation",
+  version: "1.0.0",
+  dependencies: {
+    cheerio: "^1.0.0",
+    dotenv: "^16.0.0",
+    express: "^4.18.0",
+    "node-fetch": "^2.7.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    qrcode: "^1.5.4",
+  },
+};
+
+const pkgPath = path.join(__dirname, "package.json");
+if (!fs.existsSync(pkgPath)) {
+  fs.writeFileSync(pkgPath, JSON.stringify(packageJson, null, 2));
+  console.log("✓ created package.json");
+} else {
+  console.log("- package.json already exists");
+}
+
+console.log("Installing dependencies...");
+execSync("npm install", { cwd: __dirname, stdio: "inherit" });
+console.log("✓ dependencies installed");
 
 const dirs = ["output", "txt", "txtVN", "prompts", "contexts"];
 
